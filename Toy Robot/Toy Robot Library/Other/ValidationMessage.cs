@@ -3,7 +3,7 @@
     /// <summary>
     /// Class used to pass information regarding successful or unsuccessful usage of a function
     /// </summary>
-    public class ValidationMessage
+    public struct ValidationMessage
     {
         /// <summary>
         /// Value showing whether the function was used successfully

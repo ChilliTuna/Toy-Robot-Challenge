@@ -1,7 +1,4 @@
-﻿using System.Data.SqlTypes;
-using System.Runtime.InteropServices;
-
-namespace Toy_Robot_Library
+﻿namespace Toy_Robot_Library
 {
     /// <summary>
     /// Struct containing an x y value pair as floats
