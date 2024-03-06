@@ -5,10 +5,10 @@
     /// </summary>
     public abstract class Actor
     {
-        public Vector2 position { get; private set; } = new Vector2();
-        public Direction rotation { get; private set; } = 0;
+        public Vector2 position { get; protected set; } = new Vector2();
+        public Direction rotation { get; protected set; } = 0;
         public Board board { get; private set; } = new Board();
-        private bool isPlaced = false;
+        protected bool isPlaced = false;
 
         public ValidationMessage Place(Vector2 startPosition)
         {
@@ -16,11 +16,12 @@
             if (board.IsPointOnBoard(startPosition))
             {
                 this.position = startPosition;
+                isPlaced = true;
                 return new ValidationMessage(true, "Successful placement");
             }
             else
             {
-                return new ValidationMessage(false, "Unsuccessful placement. Point not on board");
+                return new ValidationMessage(false, "Unsuccessful placement. Entered point not on board");
             }
         }
 
@@ -31,21 +32,47 @@
             {
                 this.board = newBoard;
                 this.position = startPosition;
+                isPlaced = true;
                 return new ValidationMessage(true, "Successful placement");
             }
             else
             {
-                return new ValidationMessage(false, "Unsuccessful placement. Point not on board");
+                return new ValidationMessage(false, "Unsuccessful placement. Entered point not on board");
             }
         }
 
-        public ValidationMessage Rotate(Direction direction)
+        protected ValidationMessage Rotate(Direction direction)
+        {
+            if (isPlaced)
+            {
+                return AttemptRotate(direction);
+            }
+            else
+            {
+                return new ValidationMessage(false, "Unsuccessful rotation. Must place on board first");
+            }
+            
+        }
+
+        public virtual ValidationMessage AttemptRotate(Direction direction)
         {
             rotation = (direction);
 
             return new ValidationMessage(true, "Successful rotation");
         }
 
-        public abstract ValidationMessage Move();
+        public ValidationMessage Move()
+        {
+            if (isPlaced)
+            {
+                return AttemptMove();
+            }
+            else
+            {
+                return new ValidationMessage(false, "Unsuccessful movement. Must place on board first");
+            }
+        }
+
+        protected abstract ValidationMessage AttemptMove();
     }
 }

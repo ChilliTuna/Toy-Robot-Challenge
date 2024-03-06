@@ -16,7 +16,7 @@
 	/// </summary>
 	public static class DirectionExtensions
 	{
-		public static string Cardinal (this Direction dir)
+		public static string GetCardinal (this Direction dir)
 		{
 			string name = Enum.GetName(typeof(Direction), dir);
 			if(name == null)
@@ -27,6 +27,16 @@
 			{
 				return name;
 			}
+		}
+
+		public static Vector2 GetVector(this Direction dir)
+		{
+			return new Vector2(); //build logic for this to work
+		}
+
+		public static int ChangeBy (this Direction dir, int amount)
+		{
+			return (int)dir + amount; //build logic for this to work
 		}
     }
 }
