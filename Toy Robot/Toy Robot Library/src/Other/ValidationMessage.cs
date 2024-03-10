@@ -1,4 +1,4 @@
-﻿namespace Toy_Robot_Library
+﻿namespace ToyRobotLibrary
 {
     /// <summary>
     /// Class used to pass information regarding successful or unsuccessful usage of a function
@@ -15,6 +15,11 @@
         /// </summary>
         public string message { get; private set; }
 
+        /// <summary>
+        /// Creates a new Validation message
+        /// </summary>
+        /// <param name="success">Was the action successful?</param>
+        /// <param name="message">Message detailing reason behind success/failure</param>
         internal ValidationMessage(bool success, string message)
         {
             this.success = success;
