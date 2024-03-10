@@ -31,7 +31,7 @@
         public Board(Vector2 origin, Vector2 dimensions)
         {
             this.origin = origin;
-            this.dimensions = Vector2.Unsign(dimensions);
+            this.dimensions = Vector2.Abs(dimensions);
         }
 
         /// <summary>

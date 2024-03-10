@@ -9,9 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="Toy Robot Library">
-      <HintPath>lib\Toy Robot Library.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\Toy Robot Library\Toy Robot Library.csproj" />
   </ItemGroup>
 
 </Project>

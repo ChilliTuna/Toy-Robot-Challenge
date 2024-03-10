@@ -27,8 +27,8 @@
 			string name = Enum.GetName(typeof(Direction), dir);
 			if(name == null)
 			{
-				return "Invalid Direction: " + dir;
-			}
+                throw new ArgumentOutOfRangeException("dir", dir, "Enum value given has no name");
+            }
 			else
 			{
 				return name;
@@ -42,7 +42,40 @@
 		/// <returns></returns>
 		public static Vector2 GetVector(this Direction dir)
 		{
-			return new Vector2(MathF.Sin((float)dir), MathF.Cos((float)dir));
+			//Converts X and Y to radians then uses the sine and cosine functions respectively to get the unit vector
+			//Have had to include rounding as the floating point error is substantial (annoyingly, cos for 90deg is only close to 0)
+			float x = (float)Math.Round(MathF.Sin(MathF.PI / 180 * (float)dir), 4);
+			float y = (float)Math.Round(MathF.Cos(MathF.PI / 180 * (float)dir), 4);
+            return new Vector2(x, y);
+		}
+
+        /// <summary>
+        /// Gets a unit vector for a given Direction. Is faster than GetVector, but only works for main 4 cardinal directions
+        /// </summary>
+        /// <param name="dir">The Direction to get the unit vector for. Only works for North, South, East and West</param>
+        /// <returns></returns>
+        public static Vector2 GetVectorFast(this Direction dir)
+		{
+			if(dir == Direction.North)
+			{
+				return new Vector2(0, 1);
+			}
+			else if(dir == Direction.East)
+			{
+				return new Vector2(1, 0);
+			}
+			else if(dir == Direction.South)
+			{
+				return new Vector2(0, -1);
+			}
+			else if(dir == Direction.West)
+			{
+				return new Vector2(-1, 0);
+			}
+			else
+			{
+				throw new ArgumentOutOfRangeException("dir", dir, "Expected value of North, South, East or West");
+			}
 		}
 
 		/// <summary>
@@ -53,7 +86,7 @@
 		/// <returns></returns>
 		public static Direction ChangeBy (this Direction dir, int amount)
 		{
-			return (Direction)(((amount * 90) + (int)dir) % 360);
+			return (Direction)Tools.Mod(((amount * 90) + (int)dir), 360);
 		}
     }
 }

@@ -42,16 +42,10 @@
         /// </summary>
         /// <param name="vec">The Vector to make positive</param>
         /// <returns></returns>
-        public static Vector2 Unsign(Vector2 vec)
+        public static Vector2 Abs(Vector2 vec)
         {
-            if (vec.x < 0)
-            {
-                vec.x *= -1;
-            }
-            if (vec.y < 0)
-            {
-                vec.y *= -1;
-            }
+            vec.x = Math.Abs(vec.x);
+            vec.y = Math.Abs(vec.y);
             return vec;
         }
     }

@@ -5,7 +5,7 @@
         /// <summary>
         /// The amount the Toy Robot moves in a given action
         /// </summary>
-        public int moveSpeed { get; set; } = 1;
+        public int moveSpeed { get; internal set; } = 1;
 
         #region Functions
         /// <summary>
