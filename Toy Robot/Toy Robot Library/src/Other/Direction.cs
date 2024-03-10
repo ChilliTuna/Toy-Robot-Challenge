@@ -24,7 +24,7 @@
 		public static string GetCardinal (this Direction dir)
 		{
 			//This keeps providing a warning for something which probably will never occur, but I've decided to put some validation anyway
-			string name = Enum.GetName(typeof(Direction), dir);
+			string? name = Enum.GetName(typeof(Direction), dir);
 			if(name == null)
 			{
                 throw new ArgumentOutOfRangeException("dir", dir, "Enum value given has no name");

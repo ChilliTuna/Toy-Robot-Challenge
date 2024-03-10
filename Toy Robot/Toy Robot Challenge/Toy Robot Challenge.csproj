@@ -3,13 +3,15 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>Toy_Robot_Challenge</RootNamespace>
+    <RootNamespace>ToyRobotChallenge</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Toy Robot Library\Toy Robot Library.csproj" />
+    <Reference Include="Toy Robot Library">
+      <HintPath>lib\Toy Robot Library.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
