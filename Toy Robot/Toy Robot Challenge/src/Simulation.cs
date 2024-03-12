@@ -1,17 +1,38 @@
-﻿using ToyRobotLibrary;
-
-namespace ToyRobotChallenge
+﻿namespace ToyRobotChallenge
 {
-    public class Simulation
+    internal sealed class Simulation
     {
-        bool shouldBeRunning = true;
+        public static Simulation instance 
+        {
+            get 
+            { 
+                if (instance == null) 
+                { 
+                    return new Simulation(); 
+                } 
+                else
+                {
+                    return instance;
+                }
+            }
+            private set { } 
+        }
 
-        ToyRobot robot = new ToyRobot();
+        private bool shouldBeRunning = true;
+        private ToyRobotController controller;
+
+        private Simulation()
+        {
+            controller = new ToyRobotController();
+        }
 
         public void Run()
         {
             Initialise();
-            Update();
+            while (shouldBeRunning)
+            {
+                Update();
+            }
         }
 
         public void Initialise()
@@ -22,20 +43,12 @@ namespace ToyRobotChallenge
 
         public void Update()
         {
-            while (shouldBeRunning)
-            {
-                string? input = Console.ReadLine();
-                Console.WriteLine(input);
-            }
+            controller.HandleUserInput();
         }
 
-        public void RunTest()
+        public void CloseSimulation()
         {
-            robot.Place();
-            Console.WriteLine(robot.position.x + ", " + robot.position.y + ", " + robot.rotation.GetCardinal());
-            robot.TurnLeft();
-            Console.WriteLine(robot.Move().message);
-            Console.WriteLine(robot.position.x + ", " + robot.position.y + ", " + robot.rotation.GetCardinal());
+            shouldBeRunning = false;
         }
     }
 }

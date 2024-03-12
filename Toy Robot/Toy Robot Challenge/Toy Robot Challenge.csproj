@@ -6,6 +6,7 @@
     <RootNamespace>ToyRobotChallenge</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Configurations>Debug;Release;Standard</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

@@ -21,7 +21,7 @@
         /// <summary>
         /// Whether the actor is currently placed on the board (true), or not (false)
         /// </summary>
-        protected bool isPlaced = false;
+        public bool isPlaced { get; private set; } = false;
         #endregion
 
         #region Functions
@@ -30,12 +30,13 @@
         /// </summary>
         /// <param name="startPosition">The position to place the actor on the board</param>
         /// <returns></returns>
-        public ValidationMessage Place(Vector2 startPosition)
+        public ValidationMessage Place(Vector2 startPosition, Direction direction)
         {
             //If the point is on the board, set the positon to position the parameter
             if (board.IsPointOnBoard(startPosition))
             {
                 this.position = startPosition;
+                this.rotation = direction;
                 isPlaced = true;
                 return new ValidationMessage(true, "Successful placement");
             }
@@ -51,7 +52,7 @@
         /// <returns></returns>
         public ValidationMessage Place()
         {
-            return Place(new Vector2(0, 0));
+            return Place(new Vector2(0, 0), Direction.North);
         }
 
         /// <summary>
@@ -60,13 +61,14 @@
         /// <param name="startPosition">The position to place the actor on the board</param>
         /// <param name="newBoard">The board to place the actor on</param>
         /// <returns></returns>
-        public ValidationMessage Place(Vector2 startPosition, Board newBoard)
+        public ValidationMessage Place(Vector2 startPosition, Direction direction, Board newBoard)
         {
             //If the point is on the new board, set the board to the board parameter and set the positon to position the parameter
             if (newBoard.IsPointOnBoard(startPosition))
             {
                 this.board = newBoard;
                 this.position = startPosition;
+                this.rotation = direction;
                 isPlaced = true;
                 return new ValidationMessage(true, "Successful placement");
             }
@@ -89,7 +91,7 @@
             }
             else
             {
-                return new ValidationMessage(false, "Unsuccessful rotation. Must place on board first");
+                return new ValidationMessage(false, "Unsuccessful rotation. Please PLACE robot before using other commands");
             }
             
         }
@@ -118,7 +120,7 @@
             }
             else
             {
-                return new ValidationMessage(false, "Unsuccessful movement. Must place on board first");
+                return new ValidationMessage(false, "Unsuccessful movement. Please PLACE robot before using other commands");
             }
         }
 

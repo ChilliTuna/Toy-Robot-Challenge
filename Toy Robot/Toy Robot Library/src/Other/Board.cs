@@ -42,7 +42,7 @@
         internal bool IsPointOnBoard(Vector2 pos)
         {
             return 
-                (origin.x <= pos.x && pos.x < origin.x + dimensions.x) &
+                (origin.x <= pos.x && pos.x < origin.x + dimensions.x) &&
                 (origin.y <= pos.y && pos.y < origin.y + dimensions.y);
         }
     }

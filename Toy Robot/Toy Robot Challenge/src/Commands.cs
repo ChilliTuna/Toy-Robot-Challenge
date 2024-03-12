@@ -1,4 +1,5 @@
-﻿using ToyRobotLibrary;
+﻿using System.Text.RegularExpressions;
+using ToyRobotLibrary;
 
 namespace ToyRobotChallenge
 {
@@ -13,43 +14,95 @@ namespace ToyRobotChallenge
 
     public static class Commands
     {
-        public static void PerformRobotAction(this ToyRobot robot, Command command)
+        private static Command? TextToCommand(string text)
         {
-            ValidationMessage result = new ValidationMessage();
-            if (command == Command.Place)
+            if (text == null)
             {
-                result = robot.Place();
-            }
-            else if (command == Command.Move)
-            {
-                result = robot.Move();
-            }
-            else if (command == Command.Left)
-            {
-                result = robot.TurnLeft();
-            }
-            else if (command == Command.Right)
-            {
-                result = robot.TurnRight();
-            }
-            else if (command == Command.Report)
-            {
-                //Do report
+                return null;
             }
             else
             {
-                throw new ArgumentException("Invalid command used", "command");
-            }
-            if (result.success == false)
-            {
-                Console.WriteLine(result.message);
+                Command outObj;
+                if (Enum.TryParse<Command>(text, true, out outObj))
+                {
+                    return outObj;
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
 
-        public static void TextToCommand(string text)
+        internal static CommandInstance? GetCommandInstance(string? text)
         {
-            //Do conversion of string to command here
-            //Need to build a parsing function that parses the text input by the user
+            if (ValidateString(text) && text != null)
+            {
+                CommandInstance? commandInstance = new CommandInstance();
+                string[] components = text.Split(' ', 2);
+                commandInstance.command = TextToCommand(components[0]);
+                components[1] = Regex.Replace(components[1], @"(\s+)", "");
+                commandInstance.parameters = components[1].Split(',');
+                return commandInstance;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        internal static string? GetCommandText(string? text)
+        {
+            if (ValidateString(text) && text != null)
+            {
+                string[] components = text.Split(' ', 2);
+                return components[0];
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static bool ValidateString(string? text)
+        {
+            if (text == null)
+            {
+                return false;
+            }
+            else
+            {
+                return !Regex.IsMatch(text, @"([a-zA-Z, \d])");
+            }
+        }
+
+        internal static bool ValidateParameters(this CommandInstance command)
+        {
+            if (command.command == null)
+            {
+                return true;
+            }
+            else if (command.command == Command.Place)
+            {
+                if (command.parameters == null || command.parameters.Length < 3)
+                {
+                    return false;
+                }
+                else
+                {
+                    int param1Out;
+                    bool param1 = int.TryParse(command.parameters[0], out param1Out);
+                    int param2Out;
+                    bool param2 = int.TryParse(command.parameters[1], out param2Out);
+                    Direction param3Out;
+                    bool param3 = Enum.TryParse<Direction>(command.parameters[2], true, out param3Out);
+                    return param1 && param2 && param3;
+                }
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }
