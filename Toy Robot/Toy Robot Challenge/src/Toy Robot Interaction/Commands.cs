@@ -79,7 +79,7 @@ namespace ToyRobotChallenge
             }
             else
             {
-                return !Regex.IsMatch(text, @"([^a-zA-Z, \d])");
+                return !Regex.IsMatch(text, @"([^a-zA-Z, \-\d])");
             }
         }
 

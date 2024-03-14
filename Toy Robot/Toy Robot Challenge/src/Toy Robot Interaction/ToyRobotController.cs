@@ -89,7 +89,7 @@ namespace ToyRobotChallenge
             }
             else if (command.command == null)
             {
-                Console.WriteLine("Input invalid");
+                Console.WriteLine("Invalid command. Please use accepted command");
             }
             else
             {
@@ -147,6 +147,7 @@ namespace ToyRobotChallenge
                 "RIGHT",
                 "MOVE",
                 "REPORT",
+                "LEFT",
                 "LEFT",
                 "MOVE",
                 "LEFT",
