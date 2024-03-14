@@ -19,6 +19,7 @@
 
         private bool shouldBeRunning = true;
         private ToyRobotController controller;
+        private bool testMode = false;
 
         private Simulation()
         {
@@ -38,11 +39,19 @@
         public void Initialise()
         {
             Console.WriteLine("Welcome to the Toy Robot Challenge!");
+            if (testMode)
+            {
+                controller.RunStandardTest();
+            }
             Console.WriteLine("Awaiting input...");
         }
 
         public void Update()
         {
+            if (testMode)
+            {
+                return;
+            }
             controller.HandleUserInput();
         }
 

@@ -110,8 +110,64 @@ namespace ToyRobotChallenge
             //Running standard test will output the success messages by default
             bool previousSuccessMessages = writeSuccessMessages;
             writeSuccessMessages = shouldWriteSuccess;
-            
+
             //      ||Write tests to conduct here||
+            string[] tests = 
+            { 
+                "MOVE",
+                "LEFT",
+                "RIGHT",
+                "REPORT",
+                "PLACE 5, 5, NORTH",
+                "PLACE 6, 0, NORTH",
+                "PLACE 3, 5, NORTH",
+                "PLACE -1, 2, NORTH",
+                "PLACE 4, -4, NORTH",
+                "PLACE 3, 2, INVALIDWORD",
+                "INVALIDWORD 9, TEST",
+                "PLACE 2, 4, NORTH",
+                "REPORT",
+                "PLACE 1, 0, EAST",
+                "PLACE 7, 1, NORTH",
+                "REPORT",
+                "MOVE",
+                "LEFT",
+                "MOVE",
+                "REPORT",
+                "RIGHT",
+                "MOVE",
+                "REPORT",
+                "PLACE 0, 0, WEST",
+                "MOVE",
+                "LEFT",
+                "MOVE",
+                "REPORT",
+                "PLACE 4, 4, NORTH",
+                "MOVE",
+                "RIGHT",
+                "MOVE",
+                "REPORT",
+                "LEFT",
+                "MOVE",
+                "LEFT",
+                "MOVE",
+                "REPORT",
+                "RIGHT",
+                "RIGHT",
+                "RIGHT",
+                "REPORT",
+                "RIGHT",
+                "REPORT",
+                "LEFT",
+                "REPORT"
+            };
+
+            foreach (string test in tests)
+            {
+                Console.WriteLine(test);
+                HandleInput(test);
+                Console.WriteLine();
+            }
 
             writeSuccessMessages = previousSuccessMessages;
         }
