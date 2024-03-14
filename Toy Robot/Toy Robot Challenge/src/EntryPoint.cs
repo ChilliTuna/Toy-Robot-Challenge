@@ -4,7 +4,7 @@ public class EntryPoint
 {
     public static void Main()
     {
-        Simulation simulation = Simulation.instance;
+        Simulation simulation = Simulation.Instance;
         simulation.Run();
     }
 }

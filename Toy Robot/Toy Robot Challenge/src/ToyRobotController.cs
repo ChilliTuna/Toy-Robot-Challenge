@@ -54,7 +54,7 @@ namespace ToyRobotChallenge
                     if (command.parameters != null)
                     {
                         Vector2 position = new Vector2(int.Parse(command.parameters[0]), int.Parse(command.parameters[1]));
-                        Direction dir = Enum.Parse<Direction>(command.parameters[2]);
+                        Direction dir = Enum.Parse<Direction>(command.parameters[2], true);
                         result = robot.Place(position, dir);
                     }
                 }
@@ -81,6 +81,10 @@ namespace ToyRobotChallenge
                 {
                     Console.WriteLine("Robot not yet placed. Please PLACE robot before using other commands");
                 }
+            }
+            else if (command.command == null)
+            {
+                Console.WriteLine("Input invalid");
             }
             else
             {

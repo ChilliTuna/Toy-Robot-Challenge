@@ -2,18 +2,17 @@
 {
     internal sealed class Simulation
     {
-        public static Simulation instance 
+        private static Simulation instance;
+
+        public static Simulation Instance
         {
             get 
             { 
                 if (instance == null) 
-                { 
-                    return new Simulation(); 
-                } 
-                else
                 {
-                    return instance;
+                    instance = new Simulation();
                 }
+                return instance;
             }
             private set { } 
         }
@@ -24,6 +23,7 @@
         private Simulation()
         {
             controller = new ToyRobotController();
+            instance = this;
         }
 
         public void Run()
