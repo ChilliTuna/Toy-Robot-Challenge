@@ -23,9 +23,8 @@ namespace ToyRobotChallenge
             this.robot = robot;
         }
 
-        public void HandleUserInput()
+        public void HandleInput(string? input)
         {
-            string? input = Console.ReadLine();
             if (Commands.ValidateString(input))
             {
                 CommandInstance? command = Commands.GetCommandInstance(input);
@@ -42,6 +41,12 @@ namespace ToyRobotChallenge
             {
                 Console.WriteLine("Input invalid. Please try again.");
             }
+        }
+
+        public void HandleUserInput()
+        {
+            string? input = Console.ReadLine();
+            HandleInput(input);
         }
 
         public void PerformRobotAction(CommandInstance command)
@@ -100,13 +105,15 @@ namespace ToyRobotChallenge
             }
         }
 
-        public void RunTest()
+        public void RunStandardTest(bool shouldWriteSuccess = true)
         {
-            robot.Place();
-            Console.WriteLine(robot.position.x + ", " + robot.position.y + ", " + robot.rotation.GetCardinal());
-            robot.TurnLeft();
-            Console.WriteLine(robot.Move().message);
-            Console.WriteLine(robot.position.x + ", " + robot.position.y + ", " + robot.rotation.GetCardinal());
+            //Running standard test will output the success messages by default
+            bool previousSuccessMessages = writeSuccessMessages;
+            writeSuccessMessages = shouldWriteSuccess;
+            
+            //      ||Write tests to conduct here||
+
+            writeSuccessMessages = previousSuccessMessages;
         }
     }
 }
