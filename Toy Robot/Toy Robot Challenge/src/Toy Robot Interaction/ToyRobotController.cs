@@ -2,6 +2,9 @@
 
 namespace ToyRobotChallenge
 {
+    /// <summary>
+    /// Class which utilises the Toy Robot Library to manage the interaction between inputs and the Toy Robot
+    /// </summary>
     internal class ToyRobotController
     {
         public ToyRobot robot { get; private set; }
@@ -23,6 +26,10 @@ namespace ToyRobotChallenge
             this.robot = robot;
         }
 
+        /// <summary>
+        /// Takes the given string, runs validation on it and then has the Toy Robot perform the input given in the string
+        /// </summary>
+        /// <param name="input"></param>
         public void HandleInput(string? input)
         {
             if (Commands.ValidateString(input))
@@ -43,12 +50,20 @@ namespace ToyRobotChallenge
             }
         }
 
+        /// <summary>
+        /// Gets user input and uses it to run the HandleInput function
+        /// </summary>
         public void HandleUserInput()
         {
             string? input = Console.ReadLine();
             HandleInput(input);
         }
 
+        /// <summary>
+        /// Uses the given Command Instance to make the toy robot perform the input action
+        /// </summary>
+        /// <param name="command"></param>
+        /// <exception cref="ArgumentException"></exception>
         public void PerformRobotAction(CommandInstance command)
         {
             ValidationMessage? result = null;
@@ -105,6 +120,10 @@ namespace ToyRobotChallenge
             }
         }
 
+        /// <summary>
+        /// A list of inputs which simulate user usage of the application to act as a standard test
+        /// </summary>
+        /// <param name="shouldWriteSuccess"></param>
         public void RunStandardTest(bool shouldWriteSuccess = true)
         {
             //Running standard test will output the success messages by default

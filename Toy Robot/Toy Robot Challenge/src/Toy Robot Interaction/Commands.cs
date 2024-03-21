@@ -3,6 +3,9 @@ using ToyRobotLibrary;
 
 namespace ToyRobotChallenge
 {
+    /// <summary>
+    /// Enum of possible commands
+    /// </summary>
     public enum Command
     {
         Place,
@@ -12,8 +15,16 @@ namespace ToyRobotChallenge
         Report
     }
 
+    /// <summary>
+    /// Class for utilising and interpreting Commands
+    /// </summary>
     public static class Commands
     {
+        /// <summary>
+        /// Converts given string to a Command
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
         private static Command? TextToCommand(string text)
         {
             if (text == null)
@@ -34,6 +45,11 @@ namespace ToyRobotChallenge
             }
         }
 
+        /// <summary>
+        /// Creates a Command Instance from a given string
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
         internal static CommandInstance? GetCommandInstance(string? text)
         {
             if (ValidateString(text) && text != null)
@@ -58,6 +74,11 @@ namespace ToyRobotChallenge
             }
         }
 
+        /// <summary>
+        /// Gets just the Command for a given string, as a string (the name of the command, ie: "Place")
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
         internal static string? GetCommandText(string? text)
         {
             if (ValidateString(text) && text != null)
@@ -71,6 +92,11 @@ namespace ToyRobotChallenge
             }
         }
 
+        /// <summary>
+        /// Runs validation on a given string, to ensure it meets the expected input format (only includes alphanum, spaces, commas and hyphens)
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
         public static bool ValidateString(string? text)
         {
             if (text == null)
@@ -83,6 +109,11 @@ namespace ToyRobotChallenge
             }
         }
 
+        /// <summary>
+        /// Runs validation on the parameters for a given Command Instance, to ensure the parameters given match the Command provided
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
         internal static bool ValidateParameters(this CommandInstance command)
         {
             bool isValid = true;

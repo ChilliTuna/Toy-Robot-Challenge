@@ -1,5 +1,8 @@
 ﻿namespace ToyRobotChallenge
 {
+    /// <summary>
+    /// Simulation singleton
+    /// </summary>
     internal sealed class Simulation
     {
         private static Simulation instance;
