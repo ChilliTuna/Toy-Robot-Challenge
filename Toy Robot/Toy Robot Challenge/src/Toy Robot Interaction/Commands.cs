@@ -129,17 +129,14 @@ namespace ToyRobotChallenge
                 }
                 else
                 {
-                    int param1Out;
-                    bool param1 = int.TryParse(command.parameters[0], out param1Out);
-                    int param2Out;
-                    bool param2 = int.TryParse(command.parameters[1], out param2Out);
-                    Direction param3Out;
-                    bool param3 = Enum.TryParse<Direction>(command.parameters[2], true, out param3Out);
+                    bool param1 = int.TryParse(command.parameters[0], out _);
+                    bool param2 = int.TryParse(command.parameters[1], out _);
+                    bool param3 = !int.TryParse(command.parameters[2], out _) && Enum.TryParse<Direction>(command.parameters[2], true, out _);
                     isValid = param1 && param2 && param3;
                 }
                 if (!isValid)
                 {
-                    Console.WriteLine("Invalid parameters. Place command expects: x (number), y (number), Direction (text)");
+                    Console.WriteLine("Invalid parameters. Place command expects: x (as number), y (as number), Direction (as text)");
                 }
             }
             return isValid;

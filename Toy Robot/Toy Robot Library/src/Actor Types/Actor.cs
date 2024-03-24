@@ -63,19 +63,12 @@
         /// <returns></returns>
         public ValidationMessage Place(Vector2 startPosition, Direction direction, Board newBoard)
         {
-            //If the point is on the new board, set the board to the board parameter and set the positon to position the parameter
+            //If the point is on the new board, set the board to the board parameter
             if (newBoard.IsPointOnBoard(startPosition))
             {
                 this.board = newBoard;
-                this.position = startPosition;
-                this.rotation = direction;
-                isPlaced = true;
-                return new ValidationMessage(true, "Successful placement");
             }
-            else
-            {
-                return new ValidationMessage(false, "Unsuccessful placement. Entered point not on board");
-            }
+            return Place(startPosition, direction);
         }
 
         /// <summary>
